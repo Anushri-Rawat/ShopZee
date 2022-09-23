@@ -95,7 +95,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   background: rgba(0, 0, 0, 0.75) !important;
   z-index: 100;
   animation: scrollHeader 1s;

@@ -9,6 +9,7 @@ import {
   Container,
   Form,
   Button,
+  FormCheck,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +17,7 @@ import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 import Product from "../components/Product";
 import { getProductList } from "../actions/productActions";
+import Message from "../components/Message";
 
 const colors = ["brown", "red", "grey", "yellow", "lightGrey", "blue"];
 
@@ -27,7 +29,12 @@ const CollectionScreen = () => {
     price: "",
     color: "",
     brand: "",
+    category: "",
   });
+  const [sort, setSort] = useState("");
+  const [category, setCategory] = useState(null);
+  const [price, setPrice] = useState("-");
+  const [brand, setBrand] = useState("");
 
   const dispatch = useDispatch();
   const { loading, error, products, pages, page } = useSelector(
@@ -35,8 +42,31 @@ const CollectionScreen = () => {
   );
 
   useEffect(() => {
-    dispatch(getProductList("", pageNumber, 6, filterOption));
-  }, [dispatch, pageNumber, filterOption]);
+    let arr = price ? price.split("-") : [];
+    dispatch(
+      getProductList("", pageNumber, 6, {
+        ...filterOption,
+        ...(category ? { category } : {}),
+        ...(arr.length ? { "price[gte]": arr[0], "price[lte]": arr[1] } : {}),
+        brand,
+      })
+    );
+  }, [dispatch, pageNumber, filterOption, category, price, brand]);
+
+  const sortHandler = (e) => {
+    e.preventDefault();
+    if (sort === "Best Selling") {
+      setFilterOption({ ...filterOption, sort: "-rating" });
+    } else if (sort === "Sort A-Z") {
+      setFilterOption({ ...filterOption, sort: "name" });
+    } else if (sort === "Sort Z-A") {
+      setFilterOption({ ...filterOption, sort: "-name" });
+    } else if (sort === "Price high to low") {
+      setFilterOption({ ...filterOption, sort: "-price" });
+    } else {
+      setFilterOption({ ...filterOption, sort: "price" });
+    }
+  };
 
   return (
     <Container style={{ padding: "20px 0 60px" }}>
@@ -46,33 +76,67 @@ const CollectionScreen = () => {
             <ListGroup variant="flush">
               <ListGroupItem>
                 <Form.Check
+                  onChange={(e) =>
+                    setCategory((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
                   type="checkbox"
-                  id={"Headphones"}
+                  value="Headphones"
+                  checked={category === "Headphones"}
                   label={"Headphones"}
                 />
               </ListGroupItem>
               <ListGroupItem>
                 <Form.Check
+                  onChange={(e) =>
+                    setCategory((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
                   type="checkbox"
-                  id={"Speakers"}
+                  value="Speakers"
+                  checked={category === "Speakers"}
                   label={"Speakers"}
                 />
               </ListGroupItem>
               <ListGroupItem>
                 {" "}
                 <Form.Check
+                  onChange={(e) =>
+                    setCategory((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
                   type="checkbox"
-                  id={"SmartWatch"}
+                  value="SmartWatch"
+                  checked={category === "SmartWatch"}
                   label={"SmartWatch"}
                 />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" id={"Camera"} label={"Camera"} />
+                <Form.Check
+                  onChange={(e) =>
+                    setCategory((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                  type="checkbox"
+                  value="Camera"
+                  checked={category === "Camera"}
+                  label={"Camera"}
+                />
               </ListGroupItem>
               <ListGroupItem>
                 <Form.Check
+                  onChange={(e) =>
+                    setCategory((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
                   type="checkbox"
-                  id={"Gaming-Toys"}
+                  value="Gaming-Toys"
+                  checked={category === "Gaming-Toys"}
                   label={"Gaming-Toys"}
                 />
               </ListGroupItem>
@@ -84,22 +148,82 @@ const CollectionScreen = () => {
                 <h3>Price</h3>
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" id={`$0-$100`} label={`$0-$100`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `0-100`}
+                  value={`0-100`}
+                  label={`$0-$100`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" label={`$100-$200`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `100-200`}
+                  value={`100-200`}
+                  label={`$100-$200`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" label={`$200-$400`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `200-400`}
+                  value={`200-400`}
+                  label={`$200-$400`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" label={`$300-$500`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `300-500`}
+                  value={`300-500`}
+                  label={`$300-$500`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" label={`$500-$1000`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `500-1000`}
+                  value={`500-1000`}
+                  label={`$500-$1000`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
               <ListGroupItem>
-                <Form.Check type="checkbox" label={`$1000+`} />
+                <Form.Check
+                  type="checkbox"
+                  checked={price === `1000-30000`}
+                  value={`1000-30000`}
+                  label={`$1000+`}
+                  onChange={(e) =>
+                    setPrice((current) =>
+                      current === e.target.value ? null : e.target.value
+                    )
+                  }
+                />
               </ListGroupItem>
             </ListGroup>
           </Card>
@@ -129,28 +253,103 @@ const CollectionScreen = () => {
               <ListGroupItem>
                 <h3>Brands</h3>
               </ListGroupItem>
-              {[...new Set(products.map((item) => item.brand))].map(
-                (brand, i) => (
-                  <ListGroupItem key={i}>
-                    <Form.Check type="checkbox" label={brand} />
-                  </ListGroupItem>
-                )
-              )}
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Apple"}
+                  onChange={(e) => {
+                    setBrand((current) =>
+                      current === e.target.value ? "" : e.target.value
+                    );
+                  }}
+                  value={"Apple"}
+                  label={"Apple"}
+                />
+              </ListGroupItem>
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Cannon"}
+                  onChange={(e) => {
+                    setBrand(e.target.value);
+                  }}
+                  value={"Cannon"}
+                  label={"Cannon"}
+                />
+              </ListGroupItem>
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Sony"}
+                  onChange={(e) => {
+                    setBrand((current) =>
+                      current === e.target.value ? "" : e.target.value
+                    );
+                  }}
+                  value={"Sony"}
+                  label={"Sony"}
+                />
+              </ListGroupItem>
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Microsoft"}
+                  onChange={(e) => {
+                    setBrand((current) =>
+                      current === e.target.value ? "" : e.target.value
+                    );
+                  }}
+                  value={"Microsoft"}
+                  label={"Microsoft"}
+                />
+              </ListGroupItem>
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Boat"}
+                  onChange={(e) => {
+                    setBrand((current) =>
+                      current === e.target.value ? "" : e.target.value
+                    );
+                  }}
+                  value={"Boat"}
+                  label={"Boat"}
+                />
+              </ListGroupItem>
+              <ListGroupItem>
+                <Form.Check
+                  type="checkbox"
+                  checked={brand === "Amazon"}
+                  onChange={(e) => {
+                    setBrand((current) =>
+                      current === e.target.value ? "" : e.target.value
+                    );
+                  }}
+                  value={"Amazon"}
+                  label={"Amazon"}
+                />
+              </ListGroupItem>
             </ListGroup>
           </Card>
         </Col>
         <Col md={12} lg={9}>
           <Row>
             <Col md={6} lg={8}>
-              <h3>We've got {products.length} products for you</h3>
+              <h3>
+                We've got {products.length ? products.length : 0} products for
+                you
+              </h3>
             </Col>
             <Col md={6} lg={4}>
-              <Form style={{ display: "flex", gap: "10px" }}>
+              <Form
+                style={{ display: "flex", gap: "10px" }}
+                onSubmit={sortHandler}
+              >
                 <FormControl
                   as="select"
-                  value={filterOption.sort}
+                  value={sort}
                   onChange={(e) => {
-                    setFilterOption({ ...filterOption, sort: e.target.value });
+                    setSort(e.target.value);
                   }}
                 >
                   {[
@@ -172,12 +371,17 @@ const CollectionScreen = () => {
             </Col>
           </Row>
           <Row>
-            {loading && <Loader />}
-            {products.map((product) => (
-              <Col sm={6} md={4} key={product._id}>
-                <Product product={product} />
-              </Col>
-            ))}
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <Message variant="danger">{error}</Message>
+            ) : (
+              products.map((product) => (
+                <Col sm={6} md={4} key={product._id}>
+                  <Product product={product} />
+                </Col>
+              ))
+            )}
           </Row>
           <Row className="d-grid">
             <Paginate pages={pages} page={page} />

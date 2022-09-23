@@ -29,7 +29,7 @@ function App() {
           <Route path="/collections/all" element={<CollectionScreen />} />
           <Route path="/search/:keyword" element={<HomeScreen />} />
           <Route
-            path="/collections/page/:pageNumber"
+            path="/collections/all/page/:pageNumber"
             element={<CollectionScreen />}
           />
           <Route

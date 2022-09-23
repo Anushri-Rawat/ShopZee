@@ -39,7 +39,9 @@ const ProductCarousel = () => {
             <Carousel.Caption>
               <h3 className="content1">{item.content1}</h3>
               <p className="content2">{item.content2}</p>
-              <a className="btn-slideshow">SHOP NOW</a>
+              <Link className="btn-slideshow" to="/collections/all">
+                SHOP NOW
+              </Link>
             </Carousel.Caption>
           </Link>
         </CarouselItem>

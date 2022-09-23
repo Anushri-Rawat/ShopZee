@@ -37,7 +37,7 @@ export const getProductList =
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&page=${page}&limit=${limit}`
+        `/api/products?keyword=${keyword}&page=${page}&limit=${limit}&${qs}`
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
