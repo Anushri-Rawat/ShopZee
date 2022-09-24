@@ -25,7 +25,7 @@ const ProductFunc = ({ productId }) => {
           dispatch(addToWishList(productId));
         }}
       >
-        <i className="fa-regular fa-heart"></i>
+        <i className="fas fa-heart"></i>
       </div>
     </div>
   );
