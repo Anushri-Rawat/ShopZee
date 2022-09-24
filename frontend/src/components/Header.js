@@ -11,11 +11,13 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../actions/userActions";
+import { SHOW_MODAL } from "../constants/wishListConstants";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
   const { cartItems } = useSelector((state) => state.cart);
+  const { wishListItems } = useSelector((state) => state.wishList);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -41,9 +43,13 @@ const Header = () => {
                   <LinkContainer to="/cart">
                     <NavDropdown.Item>Cart</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/wishList">
-                    <NavDropdown.Item>WishList</NavDropdown.Item>
-                  </LinkContainer>
+                  <NavDropdown.Item
+                    onClick={() => {
+                      dispatch({ type: SHOW_MODAL });
+                    }}
+                  >
+                    WishList
+                  </NavDropdown.Item>
                 </>
               )}
               {!userInfo && (
@@ -60,22 +66,40 @@ const Header = () => {
             className="justify-content-end flex-grow-0"
           >
             <Nav className="ml-auto">
-              <LinkContainer to="/cart">
-                <NavLink>
-                  <i className="fas fa-shopping-cart"></i>
-                  {"  "}Cart
-                  <Badge
-                    bg="danger"
-                    style={{
-                      position: "relative",
-                      top: "-10px",
-                      right: "0",
-                    }}
-                  >
-                    {cartItems.length}
-                  </Badge>
-                </NavLink>
-              </LinkContainer>
+              {userInfo && (
+                <>
+                  <LinkContainer to="/cart">
+                    <NavLink>
+                      <i className="fas fa-shopping-cart"></i>
+                      {"  "}Cart
+                      <Badge
+                        bg="danger"
+                        style={{
+                          position: "relative",
+                          top: "-10px",
+                          right: "0",
+                        }}
+                      >
+                        {cartItems.length}
+                      </Badge>
+                    </NavLink>
+                  </LinkContainer>
+                  <NavLink onClick={() => dispatch({ type: SHOW_MODAL })}>
+                    <i className="fas fa-heart"></i>
+                    {"  "}WhishList
+                    <Badge
+                      bg="danger"
+                      style={{
+                        position: "relative",
+                        top: "-10px",
+                        right: "0",
+                      }}
+                    >
+                      {wishListItems.length}
+                    </Badge>
+                  </NavLink>
+                </>
+              )}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">

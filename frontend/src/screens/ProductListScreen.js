@@ -38,7 +38,7 @@ const ProductListScreen = () => {
 
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
-    if (!userInfo.isAdmin) {
+    if (!userInfo || !userInfo.isAdmin) {
       navigate(`/login`);
     }
     if (successCreate) {
@@ -46,15 +46,7 @@ const ProductListScreen = () => {
     } else {
       dispatch(getProductList("", pageNumber, 10));
     }
-  }, [
-    dispatch,
-    userInfo,
-    navigate,
-    successDelete,
-    successCreate,
-    createdProduct._id,
-    pageNumber,
-  ]);
+  }, [dispatch, userInfo, navigate, successDelete, successCreate, pageNumber]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -68,11 +60,15 @@ const ProductListScreen = () => {
   return (
     <Container>
       <Row>
-        <Col className="text-align-center" md={9}>
+        <Col className="text-align-center" md={10}>
           <h1>Products</h1>
         </Col>
-        <Col className="justify-self-end" md={3}>
-          <Button className="my-3" onClick={createProductHandler}>
+        <Col className="justify-self-end" md={2}>
+          <Button
+            className="my-3"
+            onClick={createProductHandler}
+            variant="danger"
+          >
             <i className="fas fa-plus"></i> Create Product
           </Button>
         </Col>
@@ -106,7 +102,7 @@ const ProductListScreen = () => {
                   <td>${Number(product.price).toFixed(2)}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
-                  <td>
+                  <td className="d-flex gap-2">
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>

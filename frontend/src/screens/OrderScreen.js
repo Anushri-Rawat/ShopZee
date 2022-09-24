@@ -212,7 +212,9 @@ const PlaceOrderScreen = () => {
                 <Button
                   className="btn btn-block"
                   type="button"
-                  onClick={deliverHandler(order)}
+                  onClick={() => {
+                    deliverHandler(order);
+                  }}
                 >
                   Mark as Delivered
                 </Button>

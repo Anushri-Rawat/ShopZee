@@ -18,7 +18,6 @@ export const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  console.log(filterObj);
   const count = await Product.count({ ...filterObj, ...keyword });
   const products = await Product.find({ ...filterObj, ...keyword })
     .sort(req.query.sort)
@@ -58,22 +57,19 @@ export const deleteProductById = asyncHandler(async (req, res) => {
 // @route POST/api/products
 // @access private/admin
 export const createProduct = asyncHandler(async (req, res) => {
-  // const product = new Product({
-  //   name: "Sample name",
-  //   price: 0,
-  //   user: req.user._id,
-  //   image: "/images/sample.jpg",
-  //   category: "Sample category",
-  //   brand: "sample brand",
-  //   countInStock: 0,
-  //   numReviews: 0,
-  //   description: "Sample description",
-  // });
-  // const createdProduct = await product.save();
-  const createdProduct = await Product.create({
-    ...req.body,
+  const product = new Product({
+    name: "Sample name",
+    price: 0,
     user: req.user._id,
+    image: "/images/sample.jpg",
+    category: ["Sample category"],
+    color: "white",
+    brand: "sample brand",
+    countInStock: 0,
+    numReviews: 0,
+    description: "Sample description",
   });
+  const createdProduct = await product.save();
   res.status(201).json(createdProduct);
 });
 

@@ -58,14 +58,14 @@ const UserListScreen = () => {
                 <td>
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
-                <td>
+                <td className="text-align-center">
                   {user.isAdmin ? (
                     <i className="fas fa-check" style={{ color: "green" }}></i>
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
                 </td>
-                <td>
+                <td className="d-flex gap-2">
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant="light" className="btn-sm">
                       <i className="fas fa-edit"></i>

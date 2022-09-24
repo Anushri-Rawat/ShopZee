@@ -97,6 +97,7 @@ const CartScreen = () => {
                       <Button
                         type="button"
                         onClick={() => removeFromCartHandler(item.product)}
+                        variant="danger"
                       >
                         <i className="fas fa-trash"></i>
                       </Button>
@@ -127,6 +128,7 @@ const CartScreen = () => {
               <ListGroupItem className="d-grid">
                 <Button
                   type="button"
+                  variant="dark"
                   className="btn-block"
                   disabled={cartItems.length === 0}
                   onClick={checkOutHandler}

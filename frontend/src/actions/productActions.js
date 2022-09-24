@@ -33,7 +33,6 @@ export const getProductList =
         .map((key) => `${key}=${filterOptions[key]}`)
         .join("&");
     }
-    console.log(qs);
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
@@ -108,7 +107,6 @@ export const createProduct = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(`/api/products`, {}, config);
-    console.log(data);
 
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {

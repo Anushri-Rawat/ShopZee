@@ -62,7 +62,7 @@ const UserEditScreen = () => {
   return (
     <Container>
       <Link to="/admin/userList">Go Back</Link>
-      <FormContainer>
+      <FormContainer size={6}>
         <h1>Edit user</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}

@@ -8,6 +8,7 @@ import Meta from "../components/Meta";
 import Testimonials from "../components/Testimonials";
 import ProductCarousel from "../components/ProductCarousel";
 import { getProductList } from "../actions/productActions";
+import { Link } from "react-router-dom";
 
 const imgStyle = {
   width: "100%",
@@ -21,9 +22,30 @@ const HomeScreen = () => {
   const { loading, error, products } = useSelector(
     (state) => state.productList
   );
+
   useEffect(() => {
     dispatch(getProductList("", "", 4));
-  }, []);
+    function toggleItem(elem) {
+      for (let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener("click", function (e) {
+          console.log(this.textContent);
+          var current = this;
+          for (var i = 0; i < elem.length; i++) {
+            if (current !== elem[i]) {
+              elem[i].classList.remove("activeBtn");
+            } else {
+              current.classList.add("activeBtn");
+              dispatch(
+                getProductList("", "", 4, { category: this.textContent })
+              );
+            }
+          }
+          e.preventDefault();
+        });
+      }
+    }
+    toggleItem(document.querySelectorAll(".categories a"));
+  }, [dispatch]);
 
   return (
     <div style={{ position: "relative", top: "-80px" }}>
@@ -33,18 +55,10 @@ const HomeScreen = () => {
         <Row className="mb-2">
           <h3>NEW ARRIVALS</h3>
           <Nav className="categories" style={{ gap: "5px" }}>
-            <Nav.Link
-              className="normalBtn"
-              style={{
-                color: "#fff",
-                background: "#f33c3c",
-              }}
-            >
-              Headphones
-            </Nav.Link>
-            <Nav.Link className="normalBtn">Creativity</Nav.Link>
-            <Nav.Link className="normalBtn">Power - Cable</Nav.Link>
-            <Nav.Link className="normalBtn">Case - Protection</Nav.Link>
+            <Nav.Link className="normalBtn">Headphones</Nav.Link>
+            <Nav.Link className="normalBtn">Camera</Nav.Link>
+            <Nav.Link className="normalBtn">Phone Cover</Nav.Link>
+            <Nav.Link className="normalBtn">Speaker</Nav.Link>
           </Nav>
         </Row>
         {loading ? (
@@ -62,6 +76,15 @@ const HomeScreen = () => {
             </Row>
           </>
         )}
+        <div className="d-flex justify-content-center mt-2">
+          <Link
+            to="/collections/all"
+            className="normalBtn"
+            style={{ background: "#000", color: "#fff", padding: "15px 30px" }}
+          >
+            Shop All <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
         <Testimonials />
       </Container>
       <Row style={{ "--bs-gutter-x": 0 }}>

@@ -18,12 +18,14 @@ import OrderListScreen from "./screens/OrderListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import CollectionScreen from "./screens/CollectionScreen";
+import WishListScreen from "./screens/WishListScreen";
 
 function App() {
   return (
     <>
       <Header />
       <main style={{ marginTop: "80px" }}>
+        <WishListScreen />
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/collections/all" element={<CollectionScreen />} />

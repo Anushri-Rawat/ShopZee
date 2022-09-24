@@ -28,6 +28,7 @@ import {
   orderDeliverReducer,
   OrdersListReducer,
 } from "./reducers/orderReducers.js";
+import { modalReducer, wishListReducer } from "./reducers/wishList.js";
 
 const reducers = combineReducers({
   productList: productListReducer,
@@ -51,10 +52,15 @@ const reducers = combineReducers({
   productCreateReview: productCreateReviewReducer,
   ordersList: OrdersListReducer,
   productTopRated: producttopRatedReducer,
+  modal: modalReducer,
+  wishList: wishListReducer,
 });
 
 const cartItemsFromSTorage =
   JSON.parse(localStorage.getItem("cartItems")) || [];
+
+const wishListItemsFromStorage =
+  JSON.parse(localStorage.getItem("wishListItems")) || [];
 
 const userInfoFromStorage =
   JSON.parse(localStorage.getItem("userInfo")) || null;
@@ -67,7 +73,9 @@ const initialState = {
     cartItems: cartItemsFromSTorage,
     shippingAddress: shippingAddressFronStorage,
   },
+  wishList: { wishListItems: wishListItemsFromStorage },
   userLogin: { userInfo: userInfoFromStorage },
+  modal: { showModal: false },
 };
 const middleware = [thunk];
 

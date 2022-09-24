@@ -79,7 +79,11 @@ const Footer = () => {
                       id="exampleinputemail1"
                       placeholder="Your email adress..."
                     />
-                    <Button type="submit" style={{ padding: "0.4rem 1rem" }}>
+                    <Button
+                      type="submit"
+                      style={{ padding: "0.4rem 1rem" }}
+                      variant="dark"
+                    >
                       Submit
                     </Button>
                   </FormGroup>
@@ -92,6 +96,7 @@ const Footer = () => {
                     background: "#232529",
                     color: "#ffffff",
                     borderRadius: "50%",
+                    padding: "10px 15px",
                   }}
                 >
                   <i className="fa-brands fa-twitter"></i>
@@ -101,6 +106,7 @@ const Footer = () => {
                     background: "#232529",
                     color: "#ffffff",
                     borderRadius: "50%",
+                    padding: "10px 15px",
                   }}
                 >
                   <i className="fa-brands fa-dribbble"></i>
@@ -110,6 +116,7 @@ const Footer = () => {
                     background: "#232529",
                     color: "#ffffff",
                     borderRadius: "50%",
+                    padding: "10px 15px",
                   }}
                 >
                   <i className="fa-brands fa-behance"></i>
@@ -119,6 +126,7 @@ const Footer = () => {
                     background: "#232529",
                     color: "#ffffff",
                     borderRadius: "50%",
+                    padding: "10px 15px",
                   }}
                 >
                   <i className="fa-brands fa-instagram"></i>

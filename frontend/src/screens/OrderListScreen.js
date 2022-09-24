@@ -65,7 +65,7 @@ const UserListScreen = () => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="light" className="btn-sm">
+                    <Button variant="danger" className="btn-sm">
                       Details
                     </Button>
                   </LinkContainer>

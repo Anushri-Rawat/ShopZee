@@ -5,9 +5,7 @@
   "description": "MERN Shopping cart app",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server",
-    "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "start": "nodemon backend/server"
   },
   "author": "Anushri Rawat",
   "license": "ISC",

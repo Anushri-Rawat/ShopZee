@@ -6,6 +6,8 @@ import {
   FormControl,
   Button,
   Container,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
@@ -25,6 +27,7 @@ const UserEditScreen = () => {
   const descriptionRef = useRef();
   const countInStockRef = useRef();
   const priceRef = useRef();
+  const colorRef = useRef();
   const [image, setImage] = useState();
   const [uploading, setUploading] = useState(false);
 
@@ -67,7 +70,7 @@ const UserEditScreen = () => {
         name: nameRef.current.value,
         image,
         brand: brandRef.current.value,
-        category: categoryRef.current.value,
+        category: categoryRef.current.value.split(","),
         price: priceRef.current.value,
         countInStock: countInStockRef.current.value,
         description: descriptionRef.current.value,
@@ -94,7 +97,7 @@ const UserEditScreen = () => {
   return (
     <Container>
       <Link to="/admin/productList">Go Back</Link>
-      <FormContainer>
+      <FormContainer size={8}>
         <h1>Edit product</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
@@ -120,6 +123,14 @@ const UserEditScreen = () => {
                 ref={priceRef}
               ></FormControl>
             </FormGroup>
+            <FormGroup controlId="color" className="py-2">
+              <FormLabel>Color</FormLabel>
+              <FormControl
+                type="text"
+                placeholder="Enter the color."
+                ref={colorRef}
+              ></FormControl>
+            </FormGroup>
             <FormGroup controlId="brand" className="py-2">
               <FormLabel>Brand</FormLabel>
               <FormControl
@@ -130,11 +141,21 @@ const UserEditScreen = () => {
             </FormGroup>
             <FormGroup controlId="category" className="py-2">
               <FormLabel>Category</FormLabel>
-              <FormControl
-                type="text"
-                placeholder="Enter the category"
-                ref={categoryRef}
-              ></FormControl>
+              <OverlayTrigger
+                key="bottom"
+                placement="bottom"
+                overlay={
+                  <Tooltip id={`tooltip-$bottom`}>
+                    you can add multiple categories separted with comma.
+                  </Tooltip>
+                }
+              >
+                <FormControl
+                  type="text"
+                  placeholder="Enter the category."
+                  ref={categoryRef}
+                ></FormControl>
+              </OverlayTrigger>
             </FormGroup>
             <FormGroup controlId="countInStock" className="py-2">
               <FormLabel>Count in stock</FormLabel>

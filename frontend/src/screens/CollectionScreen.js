@@ -9,7 +9,6 @@ import {
   Container,
   Form,
   Button,
-  FormCheck,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,22 +18,19 @@ import Product from "../components/Product";
 import { getProductList } from "../actions/productActions";
 import Message from "../components/Message";
 
-const colors = ["brown", "red", "grey", "yellow", "lightGrey", "blue"];
+const colors = ["black", "red", "grey", "yellow", "lightGrey", "blue"];
 
 const CollectionScreen = () => {
   let { pageNumber } = useParams();
   pageNumber = pageNumber || 1;
   const [filterOption, setFilterOption] = useState({
     sort: "",
-    price: "",
-    color: "",
-    brand: "",
-    category: "",
   });
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState(null);
   const [price, setPrice] = useState("-");
   const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
 
   const dispatch = useDispatch();
   const { loading, error, products, pages, page } = useSelector(
@@ -49,9 +45,10 @@ const CollectionScreen = () => {
         ...(category ? { category } : {}),
         ...(arr.length ? { "price[gte]": arr[0], "price[lte]": arr[1] } : {}),
         brand,
+        color,
       })
     );
-  }, [dispatch, pageNumber, filterOption, category, price, brand]);
+  }, [dispatch, pageNumber, filterOption, category, price, brand, color]);
 
   const sortHandler = (e) => {
     e.preventDefault();
@@ -69,7 +66,7 @@ const CollectionScreen = () => {
   };
 
   return (
-    <Container style={{ padding: "20px 0 60px" }}>
+    <Container style={{ padding: "20px 10px 60px" }}>
       <Row>
         <Col className="d-none d-lg-block" lg={3}>
           <Card>
@@ -241,9 +238,19 @@ const CollectionScreen = () => {
                       width: "25px",
                       height: "25px",
                     }}
+                    onClick={() => {
+                      setColor(color);
+                    }}
                     key={i}
                   ></div>
                 ))}
+                <div
+                  onClick={() => {
+                    setColor("");
+                  }}
+                >
+                  <i className="fas fa-times"></i>
+                </div>
               </ListGroupItem>
               <ListGroupItem></ListGroupItem>
             </ListGroup>

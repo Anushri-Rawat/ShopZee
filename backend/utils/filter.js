@@ -8,10 +8,19 @@ const filter = (queryString) => {
       throw new Error(`The parameter ${key} is not supported for searching.`);
     }
   }
-  let query = JSON.stringify(queryObj).replace(
-    /\b(gt|gte|lt|lte|in)\b/g,
-    (match) => `$${match}`
+  let query = JSON.parse(
+    JSON.stringify(queryObj).replace(
+      /\b(gt|gte|lt|lte|in)\b/g,
+      (match) => `$${match}`
+    )
   );
-  return JSON.parse(query);
+
+  const answer = Object.keys(query)
+    .filter((key) => key !== "price")
+    .reduce((accumulator, key) => {
+      return { ...accumulator, [key]: { $regex: query[key], $options: "i" } };
+    }, {});
+
+  return { ...query, ...answer };
 };
 export default filter;

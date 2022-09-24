@@ -6,17 +6,20 @@
     url("../fontFamily/Sofia\ Pro\ Regular\ Az.woff") format("woff");
 }
 :root {
-  --bs-primary: "#000";
-  --bs-secondary: "#0d6efd";
   --bs-link-color: "#000";
   --bs-link-color-hover: "#000";
   --bs-link-hover-color: "#000";
+  --bs-danger: "rgb(243, 60, 60)";
 }
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Sofia Pro Regular";
+}
+tr,
+td {
+  text-align: center;
 }
 /* body {
   background: #f0f1f4;
@@ -45,17 +48,21 @@ a {
   padding: 0.6rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
   border: none;
-  background-color: #000;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
   border-radius: 2px;
 }
+
+.activeBtn {
+  color: #fff !important;
+  background: #f33c3c !important;
+}
+
 .product-card:hover .product-functionality {
   display: flex;
 }
@@ -185,6 +192,10 @@ header.nav-link {
   }
 }
 /*----------------homepage--------------------*/
+.categories .normalBtn:hover {
+  background-color: #f33c3c !important;
+  color: #fff !important;
+}
 .normalBtn {
   padding: 12px 20px;
   font-size: 16px;
@@ -203,6 +214,9 @@ img[lazy="loaded"] {
 }
 
 /*------------Products detail page------------*/
+#productDetailsRow .list-group-item {
+  border: none;
+}
 .details-tab .list-group-item a {
   position: relative;
 }
@@ -234,6 +248,14 @@ img[lazy="loaded"] {
   color: #909297;
   font-weight: 400;
 }
+.addToCartBox {
+  width: 75%;
+}
+@media (max-width: 1100px) {
+  .addToCartBox {
+    width: 100%;
+  }
+}
 /*-----------shipping Page------*/
 
 .shipping-order-info .list-group .list-group-item {
@@ -244,4 +266,16 @@ img[lazy="loaded"] {
 }
 .shipping-order-info .list-group {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+/*------------wishList------*/
+.modal.fade:not(.show) .modal-dialog.modal-dialog-slideout {
+  -webkit-transform: translate(-100%, 0) scale(1);
+  transform: translate(-100%, 0) scale(1);
+}
+.modal.fade .modal-dialog {
+  margin: 0 !important;
+}
+.modal-content {
+  height: 100vh;
+  border-radius: 0;
 }

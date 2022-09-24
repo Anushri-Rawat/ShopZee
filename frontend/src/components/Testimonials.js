@@ -34,7 +34,7 @@ const Testimonials = () => {
         <Col key={i} sm={12} md={4}>
           <Card>
             <Card.Body>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center gap-2">
                 <img
                   width="60"
                   height="60"
@@ -43,7 +43,7 @@ const Testimonials = () => {
                   src="//cdn.shopify.com/s/files/1/0159/9193/0928/files/Untit.png?v=1575435476"
                 />
                 <div className="author-info">
-                  <h3>{author.name}</h3>
+                  <h5>{author.name}</h5>
                   <p>{author.designation}</p>
                 </div>
               </div>

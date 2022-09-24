@@ -18,6 +18,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
 import ScrollableNav from "../components/ScrollableNav";
+import { addToWishList } from "../actions/wishListActions";
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
@@ -52,11 +53,11 @@ const ProductScreen = () => {
         <>
           <Meta title={product.name} />
           <Row>
-            <Col md={4} lg={6}>
+            <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={5} lg={3}>
-              <ListGroup variant="flush">
+            <Col md={6}>
+              <ListGroup variant="flush" id="productDetailsRow">
                 <ListGroupItem>
                   <h3>{product.name}</h3>
                 </ListGroupItem>
@@ -71,9 +72,7 @@ const ProductScreen = () => {
                   Description: {product.description}
                 </ListGroupItem>
               </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
+              <Card className="addToCartBox">
                 <ListGroup>
                   <ListGroupItem>
                     <Row>
@@ -117,11 +116,23 @@ const ProductScreen = () => {
                     <Button
                       onClick={addToCartHandler}
                       className="btn-block"
-                      style={{ background: "#f33c3c" }}
+                      variant="danger"
                       type="submit"
                       disabled={product.countInStock === 0}
                     >
                       Add to cart
+                    </Button>
+                  </ListGroupItem>
+                  <ListGroupItem className="d-grid">
+                    <Button
+                      onClick={() => {
+                        dispatch(addToWishList(id));
+                      }}
+                      className="btn-block"
+                      variant="danger"
+                      type="submit"
+                    >
+                      Add to Favourites
                     </Button>
                   </ListGroupItem>
                 </ListGroup>

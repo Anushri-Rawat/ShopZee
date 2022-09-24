@@ -106,8 +106,7 @@ const ProfileScreen = () => {
                 ref={emailRef}
               ></FormControl>
             </FormGroup>
-            <a
-              href="/"
+            <div
               style={{
                 display: "block",
                 textDecoration: "underline",
@@ -116,7 +115,7 @@ const ProfileScreen = () => {
               onClick={(e) => setOpen(!open)}
             >
               Update Password
-            </a>
+            </div>
             {open && (
               <>
                 <FormGroup controlId="currentPassword" className="py-2">
@@ -145,7 +144,7 @@ const ProfileScreen = () => {
                 </FormGroup>
               </>
             )}
-            <Button type="submit" variant="primary" className="mt-3">
+            <Button type="submit" variant="danger" className="mt-3">
               Update
             </Button>
           </Form>
@@ -196,7 +195,7 @@ const ProfileScreen = () => {
                     </td>
                     <td>
                       <LinkContainer to={`/order/${order._id}`}>
-                        <Button variant="light" className="btn-sm">
+                        <Button variant="danger" className="btn-sm">
                           Details
                         </Button>
                       </LinkContainer>
