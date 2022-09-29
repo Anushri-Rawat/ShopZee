@@ -12,6 +12,7 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
           "--bs-pagination-active-bg": "#000",
           "--bs-pagination-active-border-color": "#000",
           justifyContent: "center",
+          marginTop: "15px",
         }}
       >
         {[...Array(pages).keys()].map((x) => (

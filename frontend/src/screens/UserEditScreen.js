@@ -96,7 +96,7 @@ const UserEditScreen = () => {
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></FormCheck>
             </FormGroup>
-            <Button type="submit" variant="primary" className="mt-3">
+            <Button type="submit" variant="primary" className="activeBtn mt-3">
               Update
             </Button>
           </Form>

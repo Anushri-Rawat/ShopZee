@@ -60,10 +60,10 @@ const ProductListScreen = () => {
   return (
     <Container>
       <Row>
-        <Col className="text-align-center" md={10}>
+        <Col className="text-align-center" md={9}>
           <h1>Products</h1>
         </Col>
-        <Col className="justify-self-end" md={2}>
+        <Col md={3}>
           <Button
             className="my-3"
             onClick={createProductHandler}

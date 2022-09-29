@@ -21,9 +21,6 @@ tr,
 td {
   text-align: center;
 }
-/* body {
-  background: #f0f1f4;
-} */
 a {
   text-decoration: none;
   cursor: pointer;
@@ -97,13 +94,25 @@ main {
 footer .list-group-item {
   background-color: #eaeaea;
 }
+/*-------loader-----*/
+.loading-container {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-container img {
+  max-height: 50px;
+}
 /*------header----------*/
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.75) !important;
+  background: rgba(0, 0, 0) !important;
   z-index: 100;
   animation: scrollHeader 1s;
 }

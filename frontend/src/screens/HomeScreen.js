@@ -79,7 +79,7 @@ const HomeScreen = () => {
         <div className="d-flex justify-content-center mt-2">
           <Link
             to="/collections/all"
-            className="normalBtn"
+            className="normalBtn mt-3"
             style={{ background: "#000", color: "#fff", padding: "15px 30px" }}
           >
             Shop All <i className="fas fa-arrow-right"></i>

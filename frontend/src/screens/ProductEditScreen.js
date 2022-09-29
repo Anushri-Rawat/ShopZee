@@ -192,7 +192,7 @@ const UserEditScreen = () => {
                 ref={descriptionRef}
               ></FormControl>
             </FormGroup>
-            <Button type="submit" variant="primary" className="mt-3">
+            <Button type="submit" className="activeBtn mt-3">
               Update
             </Button>
           </Form>
